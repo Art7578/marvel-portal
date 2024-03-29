@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCharacters } from "../../service";
 import CharList from "../../components/CharList/CharList";
+import css from './CharPage.module.css';
 
 const CharPage = () => {
   const dispatch = useDispatch();
@@ -51,23 +52,28 @@ const CharPage = () => {
   };
 
   return (
-    <div className="char-page">
-      <h1>Marvel Characters</h1>
+    <div className={css.char_page}>
+      <h1 className={css.title}>Marvel Characters</h1>
       <CharList characters={characters} />
-      <div>
-        <button onClick={handlePrevPage} disabled={offset === 0}>
-          Prev Page
-        </button>
-        <span>Page {page}</span>
-        <button onClick={handleLoadMore}>Next Page</button>
-        <input
-          type="text"
-          value={inputPage}
-          onChange={handleChangePage}
-          onKeyDown={handleKeyDown} // Заменяем onKeyPress на onKeyDown
-          placeholder="Enter page number"
-        />
-        <button onClick={handleGoToPage}>Go</button>
+      <div className={css.pagination_container}>
+        <div className={css.buttons}>
+          <button className={css.pagination_button} onClick={handlePrevPage} disabled={offset === 0}>
+            Prev Page
+          </button>
+          <span className={css.page_count}>Page {page}</span>
+          <button className={css.pagination_button} onClick={handleLoadMore}>Next Page</button>
+        </div>
+        <div className={css.input}>
+          <input
+              type="text"
+              value={inputPage}
+              onChange={handleChangePage}
+              onKeyDown={handleKeyDown} 
+              placeholder="Enter page number"
+              className={css.page_input}
+          />
+          <button className={css.go_button} onClick={handleGoToPage}>Go</button>
+        </div>
       </div>
     </div>
   );

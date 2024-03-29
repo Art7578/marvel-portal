@@ -1,0 +1,43 @@
+.root {
+    background-color: #363434;
+    padding: 10px 0;
+}
+
+.inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    padding: 10px;
+    background-color: #ed1d24;
+    border-radius: 6px;
+    font-size: 36px;
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.buttons {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.fav {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.fav:hover {
+    background-color: #fff;
+    color: #ed1d24;
+}
