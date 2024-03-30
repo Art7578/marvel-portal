@@ -4,16 +4,16 @@ export const GET_CHARACTER_INFO_REQUEST = 'GET_CHARACTER_INFO_REQUEST';
 export const GET_CHARACTER_INFO_SUCCESS = 'GET_CHARACTER_INFO_SUCCESS';
 export const GET_CHARACTER_INFO_FAILURE = 'GET_CHARACTER_INFO_FAILURE';
 
-export const getCharacterInfoRequest = () => ({
+const getCharacterInfoRequest = () => ({
   type: GET_CHARACTER_INFO_REQUEST,
 });
 
-export const getCharacterInfoSuccess = (characterInfo) => ({
+const getCharacterInfoSuccess = (characterInfo) => ({
   type: GET_CHARACTER_INFO_SUCCESS,
   payload: characterInfo,
 });
 
-export const getCharacterInfoFailure = (error) => ({
+const getCharacterInfoFailure = (error) => ({
   type: GET_CHARACTER_INFO_FAILURE,
   payload: error,
 });

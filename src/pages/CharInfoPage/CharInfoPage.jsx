@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCharacterInfo } from "../../service";
-import css from "./CharInfo.module.css"; // Предполагается, что у вас есть модуль CSS для этого компонента
+import css from "./CharInfo.module.css"; 
 
 const CharInfo = () => {
   const { characterId } = useParams();

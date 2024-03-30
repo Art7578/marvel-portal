@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCharacters } from "../../service";
 import CharList from "../../components/CharList/CharList";
 import Pagination from "../../components/Pagination/Pagination";
-import css from './CharPage.module.css';
+import css from '../../components/css/Page.module.css';
 
 const CharPage = () => {
   const dispatch = useDispatch();

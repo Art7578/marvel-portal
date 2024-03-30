@@ -5,6 +5,7 @@ import CharPage from "./pages/CharPage/CharPage";
 import Header from "./components/Header/Header";
 import CharInfo from "./pages/CharInfoPage/CharInfoPage";
 import ComicPage from "./pages/ComicPage/ComicPage";
+import ComicInfo from "./pages/ComicInfoPage/ComicInfoPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/characters" element={<CharPage/>} />
         <Route path="/characters/:characterId" element={<CharInfo/>} />
         <Route path="/comics" element={<ComicPage/>} />
+        <Route path="/comics/:comicId" element={<ComicInfo/>} />
       </Routes>
     </>
   );

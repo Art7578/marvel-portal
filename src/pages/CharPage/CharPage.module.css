@@ -1,12 +1,12 @@
 .char_page {
-  padding: 20px;
-  font-family: "Arial", sans-serif;
-}
-
-.title {
-  font-size: 36px;
-  color: #ffffff;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
-}
+    padding: 20px;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .title {
+    font-size: 36px;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }

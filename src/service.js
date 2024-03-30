@@ -57,7 +57,12 @@ const getAllComics = (offset = 0) => {
     };
 };
 
+const getComicInfo = async (comicId) => {
+    const response = await axios.get(`${url}comics/${comicId}?ts=${timestamp}&apikey=${key}&hash=${hash}`);
+    return response.data.data.results[0];
+};
 
 
 
-export { getAllCharacters, getCharacterInfo, getAllComics };
+
+export { getAllCharacters, getCharacterInfo, getAllComics, getComicInfo };
