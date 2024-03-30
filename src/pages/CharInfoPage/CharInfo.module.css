@@ -1,0 +1,56 @@
+.char_info {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.thumbnail {
+  width: 300px;
+  height: 400px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.comics_list,
+.series_list,
+.stories_list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comic,
+.serie,
+.story {
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #e8e8e8;
+  border-radius: 5px;
+}
+
+h1, h2, p, li {
+    text-align: center;
+}
+
+h1 {
+  color: #d81d1d; 
+}
+
+h2 {
+  color: #212121; 
+}
+
+p {
+  color: #333; 
+}
