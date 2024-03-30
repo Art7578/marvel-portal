@@ -16,6 +16,9 @@ const Header = () => {
                     <Link className={css.fav} to="/characters">
                         <span>Characters</span>
                     </Link>
+                    <Link className={css.fav} to="/comics">
+                        <span>Comics</span>
+                    </Link>
                 </div>
             </div>
         </div>

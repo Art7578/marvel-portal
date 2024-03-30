@@ -1,4 +1,4 @@
-.char_list {
+.list {
     display: flex;
     flex-wrap: wrap;
     gap: 50px;

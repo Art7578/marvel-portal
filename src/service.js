@@ -1,5 +1,6 @@
 import { API_KEY, PRIVATE_KEY } from "./keys";
 import { getAllCharactersRequest, getAllCharactersSuccess, getAllCharactersFailure } from "./redux/actions/charactersActions";
+import { getAllComicsRequest, getAllComicsSuccess, getAllComicsFailure } from "./redux/actions/comicsActions";
 import md5 from "crypto-js/md5";
 import axios from 'axios';
 
@@ -17,10 +18,10 @@ const getAllCharacters = (offset = 0) => {
         try {
             const response = await axios.get(`${url}characters?ts=${timestamp}&limit=${limit}&offset=${offset}&apikey=${key}&hash=${hash}`);
             const characters = response.data.data.results.map(character => {
-                const { id, name, description, thumbnail, urls } = character;
+                const { id, name, thumbnail, urls } = character;
                 const homepage = urls.find(url => url.type === "detail")?.url || "";
                 const wiki = urls.find(url => url.type === "wiki")?.url || "";
-                return { id, name, description, thumbnail, homepage, wiki };
+                return { id, name, thumbnail, homepage, wiki };
             });
 
             dispatch(getAllCharactersSuccess(characters)); 
@@ -34,7 +35,29 @@ const getAllCharacters = (offset = 0) => {
 const getCharacterInfo = async (characterId) => {
     const response = await axios.get(`${url}characters/${characterId}?ts=${timestamp}&apikey=${key}&hash=${hash}`);
     return response.data.data.results[0];
-  };
+};
+
+const getAllComics = (offset = 0) => {
+    return async (dispatch) => {
+        dispatch(getAllComicsRequest()); 
+
+        try {
+            const response = await axios.get(`${url}comics?ts=${timestamp}&limit=${limit}&offset=${offset}&apikey=${key}&hash=${hash}`);
+            const comics = response.data.data.results.map(comic => {
+                const { id, title, thumbnail, urls } = comic;
+                const detailUrl = urls.find(url => url.type === "detail")?.url || "";
+                return { id, title, thumbnail, detailUrl };
+            });
+
+            dispatch(getAllComicsSuccess(comics)); 
+        } catch (error) {
+            console.error('Error fetching comics:', error);
+            dispatch(getAllComicsFailure(error)); 
+        }
+    };
+};
 
 
-export { getAllCharacters, getCharacterInfo };
+
+
+export { getAllCharacters, getCharacterInfo, getAllComics };

@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCharacters } from "../../service";
-import CharList from "../../components/CharList/CharList";
+import { getAllComics } from "../../service";
+import ComicList from "../../components/ComicList/ComicList";
 import Pagination from "../../components/Pagination/Pagination";
-import css from './CharPage.module.css';
+import css from './ComicPage.module.css';
 
-const CharPage = () => {
+const ComicPage = () => {
   const dispatch = useDispatch();
-  const characters = useSelector(state => state.characters.characters);
+  const comics = useSelector(state => state.comics.comics);
   const [offset, setOffset] = useState(() => {
-    const savedOffset = localStorage.getItem("offset");
+    const savedOffset = localStorage.getItem("comicOffset");
     return savedOffset ? parseInt(savedOffset, 10) : 0;
   });
   const [page, setPage] = useState(1); 
   const [inputPage, setInputPage] = useState(""); 
 
   useEffect(() => {
-    dispatch(getAllCharacters(offset));
+    dispatch(getAllComics(offset));
     window.scrollTo({ top: 0, behavior: "smooth" }); 
   }, [dispatch, offset]);
 
   useEffect(() => {
-    localStorage.setItem("offset", offset);
+    localStorage.setItem("comicOffset", offset);
     setPage(Math.floor(offset / 20) + 1);
   }, [offset]);
 
@@ -48,9 +48,9 @@ const CharPage = () => {
   };
 
   return (
-    <div className={css.char_page}>
-      <h1 className={css.title}>Marvel Characters</h1>
-      <CharList characters={characters} />
+    <div className={css.comic_page}>
+      <h1 className={css.title}>Marvel Comics</h1>
+      <ComicList comics={comics} />
       <Pagination
         offset={offset}
         setOffset={setOffset}
@@ -67,4 +67,4 @@ const CharPage = () => {
   );
 };
 
-export default CharPage;
+export default ComicPage;
