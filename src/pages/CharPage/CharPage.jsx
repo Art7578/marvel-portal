@@ -11,17 +11,16 @@ const CharPage = () => {
     const savedOffset = localStorage.getItem("offset");
     return savedOffset ? parseInt(savedOffset, 10) : 0;
   });
-  const [page, setPage] = useState(1); // Номер текущей страницы
-  const [inputPage, setInputPage] = useState(""); // Состояние для поля ввода
+  const [page, setPage] = useState(1); 
+  const [inputPage, setInputPage] = useState(""); 
 
   useEffect(() => {
     dispatch(getAllCharacters(offset));
-    window.scrollTo({ top: 0, behavior: "smooth" }); // Прокручиваем страницу вверх после обновления списка
+    window.scrollTo({ top: 0, behavior: "smooth" }); 
   }, [dispatch, offset]);
 
   useEffect(() => {
     localStorage.setItem("offset", offset);
-    // Вычисляем номер страницы на основе offset и количества элементов на странице
     setPage(Math.floor(offset / 20) + 1);
   }, [offset]);
 

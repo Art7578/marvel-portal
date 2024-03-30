@@ -19,7 +19,7 @@ export const getAllCharactersFailure = (error) => ({
 });
 
 export const fetchAllCharacters = (offset) => {
-  return async (dispatch) => { // Возвращаем функцию, которая принимает dispatch
+  return async (dispatch) => { 
     dispatch(getAllCharactersRequest());
     try {
       const characters = await getAllCharacters(offset);

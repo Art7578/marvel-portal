@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import charactersReducer from './reducers/charactersReducer'; // Подставьте правильный путь к вашему редьюсеру
+import charactersReducer from './reducers/charactersReducer'; 
+import characterInfoReducer from "./reducers/characterInfoReducer";
 
 const store = configureStore({
     reducer: {
-        characters: charactersReducer, // Замените на ваш редьюсер
+        characters: charactersReducer,
+        characterInfo: characterInfoReducer,
     },
 });
 
