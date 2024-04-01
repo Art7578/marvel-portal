@@ -4,6 +4,7 @@ import characterInfoReducer from "./reducers/characterInfoReducer";
 import comicsReducer from "./reducers/comicsReducer";
 import comicInfoReducer from "./reducers/comicInfoReducer";
 import seriesReducer from "./reducers/seriesReducer";
+import seriesInfoReducer from "./reducers/seriesInfoReducer";
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         comics: comicsReducer,
         comicInfo: comicInfoReducer,
         series: seriesReducer,
+        seriesInfo: seriesInfoReducer,
     },
 });
 

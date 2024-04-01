@@ -7,6 +7,7 @@ import CharInfo from "./pages/CharInfoPage/CharInfoPage";
 import ComicPage from "./pages/ComicPage/ComicPage";
 import ComicInfo from "./pages/ComicInfoPage/ComicInfoPage";
 import SeriesPage from "./pages/SeriesPage/SeriesPage";
+import SeriesInfoPage from "./pages/SeriesInfoPage/SeriesInfoPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/comics" element={<ComicPage/>} />
         <Route path="/comics/:comicId" element={<ComicInfo/>} />
         <Route path="/series" element={<SeriesPage/>} />
+        <Route path="/series/:seriesId" element={<SeriesInfoPage/>} />
       </Routes>
     </>
   );

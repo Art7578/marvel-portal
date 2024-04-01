@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCharacterInfo } from "../../service";
-import css from "./CharInfo.module.css"; 
+import css from "../page_css/infoPage.module.css"; 
 
 const CharInfo = () => {
   const { characterId } = useParams();
@@ -27,35 +27,35 @@ const CharInfo = () => {
   const { name, description, thumbnail, comics, series, stories } = character;
 
   return (
-    <div className={css.char_info}>
+    <div className={css.info}>
       <h1>{name}</h1>
       <img className={css.thumbnail} src={`${thumbnail.path.replace(/^http:\/\//i, 'https://')}.${thumbnail.extension}`} alt={name} />
       {description ? <p>{description}</p> : <p>No description available.</p>}
       <h2>Comics</h2>
-      <ul className={css.comics_list}>
+      <ul>
         {comics.items.length > 0 ? (
           comics.items.map((comic, index) => (
-            <li key={index} className={css.comic}>{comic.name}</li>
+            <li key={index}>{comic.name}</li>
           ))
         ) : (
           <li>No comics available.</li>
         )}
       </ul>
       <h2>Series</h2>
-      <ul className={css.series_list}>
+      <ul>
         {series.items.length > 0 ? (
           series.items.map((serie, index) => (
-            <li key={index} className={css.serie}>{serie.name}</li>
+            <li key={index}>{serie.name}</li>
           ))
         ) : (
           <li>No series available.</li>
         )}
       </ul>
       <h2>Stories</h2>
-      <ul className={css.stories_list}>
+      <ul>
         {stories.items.length > 0 ? (
           stories.items.map((story, index) => (
-            <li key={index} className={css.story}>{story.name}</li>
+            <li key={index}>{story.name}</li>
           ))
         ) : (
           <li>No stories available.</li>

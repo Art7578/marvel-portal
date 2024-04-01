@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchComicInfo } from "../../redux/actions/comicInfoActions";
-import css from "./ComicInfoPage.module.css";
+import css from "../page_css/infoPage.module.css";
 
 const ComicInfo = () => {
   const { comicId } = useParams();
