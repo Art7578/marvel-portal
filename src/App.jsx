@@ -8,6 +8,8 @@ import ComicPage from "./pages/ComicPage/ComicPage";
 import ComicInfo from "./pages/ComicInfoPage/ComicInfoPage";
 import SeriesPage from "./pages/SeriesPage/SeriesPage";
 import SeriesInfoPage from "./pages/SeriesInfoPage/SeriesInfoPage";
+import StoriesPage from "./pages/StoriesPage/StoriesPage";
+import StoriesInfo from "./pages/StoriesInfoPage/StoriesInfoPage";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/comics/:comicId" element={<ComicInfo/>} />
         <Route path="/series" element={<SeriesPage/>} />
         <Route path="/series/:seriesId" element={<SeriesInfoPage/>} />
+        <Route path="/stories" element={<StoriesPage/>} />
+        <Route path="/stories/:storyId" element={<StoriesInfo/>} />
       </Routes>
     </>
   );

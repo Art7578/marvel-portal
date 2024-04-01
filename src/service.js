@@ -2,6 +2,7 @@ import { API_KEY, PRIVATE_KEY } from "./keys";
 import { getAllCharactersRequest, getAllCharactersSuccess, getAllCharactersFailure } from "./redux/actions/charactersActions";
 import { getAllComicsRequest, getAllComicsSuccess, getAllComicsFailure } from "./redux/actions/comicsActions";
 import { getAllSeriesRequest, getAllSeriesSuccess, getAllSeriesFailure } from "./redux/actions/seriesActions";
+import { getAllStoriesRequest, getAllStoriesSuccess, getAllStoriesFailure } from "./redux/actions/storiesActions";
 import md5 from "crypto-js/md5";
 import axios from 'axios';
 
@@ -87,4 +88,28 @@ const getSeriesInfo = async (seriesId) => {
     return response.data.data.results[0];
 };
 
-export { getAllCharacters, getCharacterInfo, getAllComics, getComicInfo, getAllSeries, getSeriesInfo };
+const getAllStories = (offset = 0) => {
+    return async (dispatch) => {
+        dispatch(getAllStoriesRequest()); 
+
+        try {
+            const response = await axios.get(`${url}stories?ts=${timestamp}&limit=${limit}&offset=${offset}&apikey=${key}&hash=${hash}`);
+            const stories = response.data.data.results.map(story => {
+                const { id, title, thumbnail } = story;
+                return { id, title, thumbnail };
+            });
+
+            dispatch(getAllStoriesSuccess(stories)); 
+        } catch (error) {
+            console.error('Error fetching stories:', error);
+            dispatch(getAllStoriesFailure(error)); 
+        }
+    };
+};
+
+const getStoriesInfo = async (storyId) => {
+    const response = await axios.get(`${url}stories/${storyId}?ts=${timestamp}&apikey=${key}&hash=${hash}`);
+    return response.data.data.results[0];
+};
+
+export { getAllCharacters, getCharacterInfo, getAllComics, getComicInfo, getAllSeries, getSeriesInfo, getAllStories, getStoriesInfo };

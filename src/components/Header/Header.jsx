@@ -22,6 +22,9 @@ const Header = () => {
                     <Link className={css.fav} to="/series">
                         <span>Series</span>
                     </Link>
+                    <Link className={css.fav} to="/stories">
+                        <span>Stories</span>
+                    </Link>
                 </div>
             </div>
         </div>
