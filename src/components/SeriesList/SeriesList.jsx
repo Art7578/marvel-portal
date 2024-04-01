@@ -1,6 +1,6 @@
 import React from "react";
 import SeriesCard from "../SeriesCard/SeriesCard";
-import css from '../css/List.module.css';
+import css from '../componenets_css/List.module.css';
 
 const SeriesList = ({ series }) => {
   return (

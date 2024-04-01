@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchCharacterInfo } from "../../redux/actions/characterInfoActions";
-import css from '../css/Card.module.css';
+import css from '../componenets_css/Card.module.css';
 
 const CharCard = ({ character }) => {
   const { id, name, thumbnail, homepage, wiki } = character;

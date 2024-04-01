@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchSeriesInfo } from "../../redux/actions/seriesInfoActions";
-import css from '../css/Card.module.css';
+import css from '../componenets_css/Card.module.css';
 
 const SeriesCard = ({ series }) => {
   const { id, title, thumbnail, urls } = series;

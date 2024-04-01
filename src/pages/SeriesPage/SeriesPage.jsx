@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSeries } from "../../service";
 import SeriesList from "../../components/SeriesList/SeriesList";
 import Pagination from "../../components/Pagination/Pagination";
-import css from '../../components/css/Page.module.css';
+import css from '../../components/componenets_css/Page.module.css';
 
 const SeriesPage = () => {
   const dispatch = useDispatch();

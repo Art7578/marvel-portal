@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllComics } from "../../service";
 import ComicList from "../../components/ComicList/ComicList";
 import Pagination from "../../components/Pagination/Pagination";
-import css from '../../components/css/Page.module.css';
+import css from '../../components/componenets_css/Page.module.css';
 
 
 const ComicPage = () => {

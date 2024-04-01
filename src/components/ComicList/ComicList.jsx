@@ -1,6 +1,6 @@
 import React from "react";
 import ComicCard from "../ComicCard/ComicCard";
-import css from '../css/List.module.css';
+import css from '../componenets_css/List.module.css';
 
 const ComicList = ({ comics }) => {
   return (

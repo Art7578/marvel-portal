@@ -1,6 +1,6 @@
 import React from "react";
 import CharCard from "../CharCard/CharCard";
-import css from '../css/List.module.css';
+import css from '../componenets_css/List.module.css';
 
 const CharList = ({ characters }) => {
   return (
