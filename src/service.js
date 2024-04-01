@@ -1,6 +1,7 @@
 import { API_KEY, PRIVATE_KEY } from "./keys";
 import { getAllCharactersRequest, getAllCharactersSuccess, getAllCharactersFailure } from "./redux/actions/charactersActions";
 import { getAllComicsRequest, getAllComicsSuccess, getAllComicsFailure } from "./redux/actions/comicsActions";
+import { getAllSeriesRequest, getAllSeriesSuccess, getAllSeriesFailure } from "./redux/actions/seriesActions";
 import md5 from "crypto-js/md5";
 import axios from 'axios';
 
@@ -62,7 +63,23 @@ const getComicInfo = async (comicId) => {
     return response.data.data.results[0];
 };
 
+const getAllSeries = (offset = 0) => {
+    return async (dispatch) => {
+      dispatch(getAllSeriesRequest());
+  
+      try {
+        const response = await axios.get(`${url}series?ts=${timestamp}&limit=${limit}&offset=${offset}&apikey=${key}&hash=${hash}`);
+        const series = response.data.data.results.map(series => {
+          const { id, title, urls, thumbnail } = series;
+          return { id, title, urls, thumbnail };
+        });
+  
+        dispatch(getAllSeriesSuccess(series));
+      } catch (error) {
+        console.error('Error fetching series:', error);
+        dispatch(getAllSeriesFailure(error));
+      }
+    };
+  };
 
-
-
-export { getAllCharacters, getCharacterInfo, getAllComics, getComicInfo };
+export { getAllCharacters, getCharacterInfo, getAllComics, getComicInfo, getAllSeries };

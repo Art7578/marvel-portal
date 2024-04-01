@@ -14,7 +14,7 @@ const ComicCard = ({ comic }) => {
 
   return (
     <li className={css.card}>
-      <img className={css.image} src={`${thumbnail.path}.${thumbnail.extension}`} alt={title} />
+      <img className={css.image} src={`${thumbnail.path.replace(/^http:\/\//i, 'https://')}.${thumbnail.extension}`} alt={title} />
       <div className={css.details}>
         <h2 className={css.name}>{title}</h2>
         <Link to={`/comics/${id}`} className={css.info} onClick={handleMoreInfoClick}>More info</Link >

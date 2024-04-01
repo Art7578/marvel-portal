@@ -43,7 +43,7 @@ const ComicInfo = () => {
     <div className={css.info}>
       <h1>{title}</h1>
       {thumbnail && (
-        <img className={css.thumbnail} src={`${thumbnail.path}.${thumbnail.extension}`} alt={title} />
+        <img className={css.thumbnail} src={`${thumbnail.path.replace(/^http:\/\//i, 'https://')}.${thumbnail.extension}`} alt={title} />
       )}
       <p>Issue Number: {issueNumber}</p>
       <p>Description: {description || "Not available"}</p>

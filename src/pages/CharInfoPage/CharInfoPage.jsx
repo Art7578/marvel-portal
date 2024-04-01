@@ -29,7 +29,7 @@ const CharInfo = () => {
   return (
     <div className={css.char_info}>
       <h1>{name}</h1>
-      <img className={css.thumbnail} src={`${thumbnail.path}.${thumbnail.extension}`} alt={name} />
+      <img className={css.thumbnail} src={`${thumbnail.path.replace(/^http:\/\//i, 'https://')}.${thumbnail.extension}`} alt={name} />
       {description ? <p>{description}</p> : <p>No description available.</p>}
       <h2>Comics</h2>
       <ul className={css.comics_list}>

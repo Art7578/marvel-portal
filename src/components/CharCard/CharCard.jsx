@@ -14,7 +14,7 @@ const CharCard = ({ character }) => {
 
   return (
     <li className={css.card}>
-      <img className={css.image} src={`${thumbnail.path}.${thumbnail.extension}`} alt={name} />
+      <img className={css.image} src={`${thumbnail.path.replace(/^http:\/\//i, 'https://')}.${thumbnail.extension}`} alt={name} />
       <div className={css.details}>
         <h2 className={css.name}>{name}</h2>
         <Link to={`/characters/${id}`} className={css.info} onClick={handleMoreInfoClick}>More info</Link>
