@@ -1,21 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSeriesInfo } from "../../redux/actions/seriesInfoActions";
 import css from "../page_css/infoPage.module.css";
+import Loader from "../../components/Loader/Loader"; 
 
 const SeriesInfoPage = () => {
   const { seriesId } = useParams();
   const dispatch = useDispatch();
   const seriesInfo = useSelector(state => state.seriesInfo.seriesInfo);
-  const loading = useSelector(state => state.seriesInfo.loading);
+  const [dataLoading, setDataLoading] = useState(true); 
 
   useEffect(() => {
-    dispatch(fetchSeriesInfo(seriesId));
+    setDataLoading(true); 
+    dispatch(fetchSeriesInfo(seriesId))
+      .then(() => setDataLoading(false)) 
+      .catch(() => setDataLoading(false));
   }, [dispatch, seriesId]);
 
-  if (loading) {
-    return <div className={css.loading}>Loading...</div>;
+  if (dataLoading) {
+    return <Loader/>;
   }
 
   if (!seriesInfo) {

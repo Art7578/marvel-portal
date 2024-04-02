@@ -1,21 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchStoriesInfo } from "../../redux/actions/storiesInfoActions";
 import defaultImage from "../../components/img/default-image.jpg"
 import css from "../page_css/infoPage.module.css";
+import Loader from "../../components/Loader/Loader"; 
 
 const StoriesInfo = () => {
   const { storyId } = useParams();
   const dispatch = useDispatch();
-  const { storiesInfo, loading, error } = useSelector((state) => state.storiesInfo);
+  const { storiesInfo, error } = useSelector((state) => state.storiesInfo);
+  const [dataLoading, setDataLoading] = useState(true); 
 
   useEffect(() => {
-    dispatch(fetchStoriesInfo(storyId));
+    setDataLoading(true);
+    dispatch(fetchStoriesInfo(storyId))
+      .then(() => setDataLoading(false)) 
+      .catch(() => setDataLoading(false));
   }, [storyId, dispatch]);
 
-  if (loading) {
-    return <div className={css.loading}>Loading...</div>;
+  if (dataLoading) {
+    return <Loader/>;
   }
 
   if (error) {

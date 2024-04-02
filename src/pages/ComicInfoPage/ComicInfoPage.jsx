@@ -1,20 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchComicInfo } from "../../redux/actions/comicInfoActions";
 import css from "../page_css/infoPage.module.css";
+import Loader from "../../components/Loader/Loader"; 
 
 const ComicInfo = () => {
   const { comicId } = useParams();
   const dispatch = useDispatch();
-  const { comicInfo, loading, error } = useSelector((state) => state.comicInfo);
+  const { comicInfo, error } = useSelector((state) => state.comicInfo);
+  const [dataLoading, setDataLoading] = useState(true); 
 
   useEffect(() => {
-    dispatch(fetchComicInfo(comicId));
+    setDataLoading(true); 
+    dispatch(fetchComicInfo(comicId))
+      .then(() => setDataLoading(false)) 
+      .catch(() => setDataLoading(false)); 
   }, [comicId, dispatch]);
 
-  if (loading) {
-    return <div className={css.loading}>Loading...</div>;
+  if (dataLoading) {
+    return <Loader />; 
   }
 
   if (error) {

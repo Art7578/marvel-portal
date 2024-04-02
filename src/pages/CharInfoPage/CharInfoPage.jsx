@@ -2,23 +2,32 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCharacterInfo } from "../../service";
 import css from "../page_css/infoPage.module.css"; 
+import Loader from "../../components/Loader/Loader"; 
 
 const CharInfo = () => {
   const { characterId } = useParams();
   const [character, setCharacter] = useState(null);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
+    setLoading(true); 
     const fetchCharacter = async () => {
       try {
         const characterData = await getCharacterInfo(characterId);
         setCharacter(characterData);
       } catch (error) {
         console.error('Error fetching character info:', error);
+      } finally {
+        setLoading(false); 
       }
     };
 
     fetchCharacter();
   }, [characterId]);
+
+  if (loading) {
+    return <Loader />; 
+  }
 
   if (!character) {
     return <div className={css.loading}>Loading...</div>;
