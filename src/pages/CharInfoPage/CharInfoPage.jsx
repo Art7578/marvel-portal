@@ -8,7 +8,6 @@ const CharInfo = () => {
   const { characterId } = useParams();
   const [character, setCharacter] = useState(null);
   const [loading, setLoading] = useState(true); 
-
   useEffect(() => {
     setLoading(true); 
     const fetchCharacter = async () => {

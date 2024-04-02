@@ -4,6 +4,7 @@ import { getAllCharacters } from "../../service";
 import CharList from "../../components/CharList/CharList";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
+import CharSearchForm from "../../components/CharSearchForm/CharSearchForm";
 import css from '../page_css/Page.module.css';
 
 const CharPage = () => {
@@ -16,7 +17,9 @@ const CharPage = () => {
   const [page, setPage] = useState(1); 
   const [inputPage, setInputPage] = useState(""); 
   const [loading, setLoading] = useState(true); 
-
+  const [searchResults, setSearchResults] = useState(null); 
+  const [showPagination, setShowPagination] = useState(false); 
+  
   useEffect(() => {
     setLoading(true); 
     dispatch(getAllCharacters(offset))
@@ -28,7 +31,8 @@ const CharPage = () => {
   useEffect(() => {
     localStorage.setItem("offset", offset);
     setPage(Math.floor(offset / 20) + 1);
-  }, [offset]);
+    setShowPagination(searchResults === null); 
+  }, [offset, searchResults]);
 
   const handleLoadMore = () => {
     setLoading(true); 
@@ -55,26 +59,43 @@ const CharPage = () => {
     }
   };
 
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+    setShowPagination(false); 
+  };
+
+  const handleClearResults = () => {
+    setSearchResults(null); 
+    setShowPagination(true); 
+  };
+
   return (
     <div className={css.page}>
       <h1 className={css.title}>Marvel Characters</h1>
+      <CharSearchForm onSearchResults={handleSearchResults} onClearResults={handleClearResults} /> 
       {loading ? (
         <Loader /> 
       ) : (
         <>
-          <CharList characters={characters} /> 
-          <Pagination
-            offset={offset}
-            setOffset={setOffset}
-            page={page}
-            setPage={setPage}
-            inputPage={inputPage}
-            setInputPage={setInputPage}
-            handlePrevPage={handlePrevPage}
-            handleLoadMore={handleLoadMore}
-            handleGoToPage={handleGoToPage}
-            handleKeyDown={handleKeyDown}
-          />
+          {searchResults !== null && searchResults.length === 0 ? (
+            <div className={css.no_found}>No characters found.</div>
+          ) : (
+            <>
+              <CharList characters={searchResults !== null ? searchResults : characters} /> 
+              {showPagination && <Pagination
+                offset={offset}
+                setOffset={setOffset}
+                page={page}
+                setPage={setPage}
+                inputPage={inputPage}
+                setInputPage={setInputPage}
+                handlePrevPage={handlePrevPage}
+                handleLoadMore={handleLoadMore}
+                handleGoToPage={handleGoToPage}
+                handleKeyDown={handleKeyDown}
+              />}
+            </>
+          )}
         </>
       )}
     </div>
