@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllComics } from "../../service";
 import ComicList from "../../components/ComicList/ComicList";
 import Pagination from "../../components/Pagination/Pagination";
-import css from '../../components/componenets_css/Page.module.css';
+import Loader from "../../components/Loader/Loader";
+import css from '../page_css/Page.module.css';
 
 
 const ComicPage = () => {
@@ -15,9 +16,13 @@ const ComicPage = () => {
   });
   const [page, setPage] = useState(1); 
   const [inputPage, setInputPage] = useState(""); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getAllComics(offset));
+    setLoading(true); 
+    dispatch(getAllComics(offset))
+    .then(() => setLoading(false)) 
+    .catch(() => setLoading(false)); 
     window.scrollTo({ top: 0, behavior: "smooth" }); 
   }, [dispatch, offset]);
 
@@ -27,16 +32,19 @@ const ComicPage = () => {
   }, [offset]);
 
   const handleLoadMore = () => {
+    setLoading(true);
     setOffset((prevOffset) => prevOffset + 20);
   };
 
   const handlePrevPage = () => {
+    setLoading(true);
     setOffset((prevOffset) => Math.max(prevOffset - 20, 0));
   };
 
   const handleGoToPage = () => {
     const pageNumber = parseInt(inputPage, 10);
     if (!isNaN(pageNumber) && pageNumber > 0) {
+      setLoading(true);
       setOffset((pageNumber - 1) * 20);
       setInputPage("");
     }
@@ -51,19 +59,25 @@ const ComicPage = () => {
   return (
     <div className={css.page}>
       <h1 className={css.title}>Marvel Comics</h1>
-      <ComicList comics={comics} />
-      <Pagination
-        offset={offset}
-        setOffset={setOffset}
-        page={page}
-        setPage={setPage}
-        inputPage={inputPage}
-        setInputPage={setInputPage}
-        handlePrevPage={handlePrevPage}
-        handleLoadMore={handleLoadMore}
-        handleGoToPage={handleGoToPage}
-        handleKeyDown={handleKeyDown}
-      />
+      {loading ? (
+        <Loader /> 
+      ) : (
+        <>
+          <ComicList comics={comics} />
+          <Pagination
+            offset={offset}
+            setOffset={setOffset}
+            page={page}
+            setPage={setPage}
+            inputPage={inputPage}
+            setInputPage={setInputPage}
+            handlePrevPage={handlePrevPage}
+            handleLoadMore={handleLoadMore}
+            handleGoToPage={handleGoToPage}
+            handleKeyDown={handleKeyDown}
+          />
+        </>
+      )}
     </div>
   );
 };

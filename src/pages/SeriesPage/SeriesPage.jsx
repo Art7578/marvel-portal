@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSeries } from "../../service";
 import SeriesList from "../../components/SeriesList/SeriesList";
 import Pagination from "../../components/Pagination/Pagination";
-import css from '../../components/componenets_css/Page.module.css';
+import Loader from "../../components/Loader/Loader";
+import css from '../page_css/Page.module.css';
 
 const SeriesPage = () => {
   const dispatch = useDispatch();
@@ -14,9 +15,13 @@ const SeriesPage = () => {
   });
   const [page, setPage] = useState(1); 
   const [inputPage, setInputPage] = useState(""); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getAllSeries(offset));
+    setLoading(true); 
+    dispatch(getAllSeries(offset))
+    .then(() => setLoading(false))
+    .catch(() => setLoading(false)); 
     window.scrollTo({ top: 0, behavior: "smooth" }); 
   }, [dispatch, offset]);
 
@@ -26,16 +31,19 @@ const SeriesPage = () => {
   }, [offset]);
 
   const handleLoadMore = () => {
+    setLoading(true);
     setOffset((prevOffset) => prevOffset + 20);
   };
 
   const handlePrevPage = () => {
+    setLoading(true);
     setOffset((prevOffset) => Math.max(prevOffset - 20, 0));
   };
 
   const handleGoToPage = () => {
     const pageNumber = parseInt(inputPage, 10);
     if (!isNaN(pageNumber) && pageNumber > 0) {
+      setLoading(true);
       setOffset((pageNumber - 1) * 20);
       setInputPage("");
     }
@@ -50,19 +58,25 @@ const SeriesPage = () => {
   return (
     <div className={css.page}>
       <h1 className={css.title}>Marvel Series</h1>
-      <SeriesList series={series} />
-      <Pagination
-        offset={offset}
-        setOffset={setOffset}
-        page={page}
-        setPage={setPage}
-        inputPage={inputPage}
-        setInputPage={setInputPage}
-        handlePrevPage={handlePrevPage}
-        handleLoadMore={handleLoadMore}
-        handleGoToPage={handleGoToPage}
-        handleKeyDown={handleKeyDown}
-      />
+      {loading ? (
+        <Loader /> 
+      ) : (
+        <>
+          <SeriesList series={series} />
+          <Pagination
+            offset={offset}
+            setOffset={setOffset}
+            page={page}
+            setPage={setPage}
+            inputPage={inputPage}
+            setInputPage={setInputPage}
+            handlePrevPage={handlePrevPage}
+            handleLoadMore={handleLoadMore}
+            handleGoToPage={handleGoToPage}
+            handleKeyDown={handleKeyDown}
+          />
+        </>
+      )}
     </div>
   );
 };
