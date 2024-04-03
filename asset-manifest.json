@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/marvel-portal/static/css/main.a187cb34.css",
-    "main.js": "/marvel-portal/static/js/main.037da4bf.js",
+    "main.css": "/marvel-portal/static/css/main.daaaf0c5.css",
+    "main.js": "/marvel-portal/static/js/main.55b21366.js",
     "static/media/marvel.jpg": "/marvel-portal/static/media/marvel.01cb06e20f6abd1be491.jpg",
     "static/media/default-image.jpg": "/marvel-portal/static/media/default-image.baba1a7394e8054d69cf.jpg",
     "index.html": "/marvel-portal/index.html",
-    "main.a187cb34.css.map": "/marvel-portal/static/css/main.a187cb34.css.map",
-    "main.037da4bf.js.map": "/marvel-portal/static/js/main.037da4bf.js.map"
+    "main.daaaf0c5.css.map": "/marvel-portal/static/css/main.daaaf0c5.css.map",
+    "main.55b21366.js.map": "/marvel-portal/static/js/main.55b21366.js.map"
   },
   "entrypoints": [
-    "static/css/main.a187cb34.css",
-    "static/js/main.037da4bf.js"
+    "static/css/main.daaaf0c5.css",
+    "static/js/main.55b21366.js"
   ]
 }
