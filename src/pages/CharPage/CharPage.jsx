@@ -4,7 +4,7 @@ import { getAllCharacters } from "../../service";
 import CharList from "../../components/CharList/CharList";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
-import CharSearchForm from "../../components/CharSearchForm/CharSearchForm";
+import CharSearchForm from "../../components/searchInput/CharSearchForm";
 import css from '../page_css/Page.module.css';
 
 const CharPage = () => {

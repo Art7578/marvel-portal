@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getCharacterByName } from '../../service';
 import Loader from '../Loader/Loader';
-import css from "./CharSearchForm.module.css"
+import css from "../componenets_css/SearchForm.module.css"
 
 const CharSearchForm = ({ onSearchResults, onClearResults }) => {
     const [searchTerm, setSearchTerm] = useState('');

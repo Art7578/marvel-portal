@@ -122,4 +122,25 @@ const getCharacterByName = async (name) => {
     return response.data.data.results;
 };
 
-export { getAllCharacters, getCharacterInfo, getAllComics, getComicInfo, getAllSeries, getSeriesInfo, getAllStories, getStoriesInfo, getCharacterByName };
+const getComicByTitle = async (title) => {
+    let response;
+    if (!title) {
+        response = await axios.get(`${url}comics?ts=${timestamp}&apikey=${key}&hash=${hash}`);
+    } else {
+        response = await axios.get(`${url}comics?titleStartsWith=${title}&ts=${timestamp}&apikey=${key}&hash=${hash}`);
+    }
+    return response.data.data.results;
+};
+
+export { 
+    getAllCharacters, 
+    getCharacterInfo, 
+    getAllComics, 
+    getComicInfo, 
+    getAllSeries, 
+    getSeriesInfo, 
+    getAllStories, 
+    getStoriesInfo, 
+    getCharacterByName, 
+    getComicByTitle,
+};
