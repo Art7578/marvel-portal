@@ -4,6 +4,7 @@ import { getAllSeries } from "../../service";
 import SeriesList from "../../components/SeriesList/SeriesList";
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
+import SeriesSearchForm from "../../components/searchInput/SeriesSearchForm";
 import css from '../page_css/Page.module.css';
 
 const SeriesPage = () => {
@@ -16,6 +17,8 @@ const SeriesPage = () => {
   const [page, setPage] = useState(1); 
   const [inputPage, setInputPage] = useState(""); 
   const [loading, setLoading] = useState(true);
+  const [searchResults, setSearchResults] = useState(null); 
+  const [showPagination, setShowPagination] = useState(false);
 
   useEffect(() => {
     setLoading(true); 
@@ -28,7 +31,8 @@ const SeriesPage = () => {
   useEffect(() => {
     localStorage.setItem("seriesOffset", offset);
     setPage(Math.floor(offset / 20) + 1);
-  }, [offset]);
+    setShowPagination(searchResults === null);
+  }, [offset, searchResults]);
 
   const handleLoadMore = () => {
     setLoading(true);
@@ -55,26 +59,43 @@ const SeriesPage = () => {
     }
   };
 
+  const handleSearchResults = (results) => {
+    setSearchResults(results);
+    setShowPagination(false); 
+};
+
+const handleClearResults = () => {
+    setSearchResults(null); 
+    setShowPagination(true); 
+};
+
   return (
     <div className={css.page}>
       <h1 className={css.title}>Marvel Series</h1>
+      <SeriesSearchForm onSearchResults={handleSearchResults} onClearResults={handleClearResults}/>
       {loading ? (
         <Loader /> 
       ) : (
         <>
-          <SeriesList series={series} />
-          <Pagination
-            offset={offset}
-            setOffset={setOffset}
-            page={page}
-            setPage={setPage}
-            inputPage={inputPage}
-            setInputPage={setInputPage}
-            handlePrevPage={handlePrevPage}
-            handleLoadMore={handleLoadMore}
-            handleGoToPage={handleGoToPage}
-            handleKeyDown={handleKeyDown}
-          />
+          {searchResults !== null && searchResults.length === 0 ? (
+            <div className={css.no_found}>No series found</div>
+          ) : (
+            <>
+              <SeriesList series={searchResults !== null ? searchResults : series} />
+              {showPagination && <Pagination
+                offset={offset}
+                setOffset={setOffset}
+                page={page}
+                setPage={setPage}
+                inputPage={inputPage}
+                setInputPage={setInputPage}
+                handlePrevPage={handlePrevPage}
+                handleLoadMore={handleLoadMore}
+                handleGoToPage={handleGoToPage}
+                handleKeyDown={handleKeyDown}
+              />}
+            </>
+          )} 
         </>
       )}
     </div>
